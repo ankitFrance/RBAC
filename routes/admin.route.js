@@ -130,7 +130,7 @@ router.get('/AllUsers',isAdmin,  async(req, res, next)=>{
 
         const result = await User.updateMany(
             { roleGiven: deletedRoleTitle },
-            { $set: { roleGiven: 'client' } }
+            { $set: { roleGiven: 'default' } }
         );
 
         console.log('User roles updated successfully:', result);

@@ -34,7 +34,7 @@ let userSchema = new schema({
     },
     roleGiven: {
         type: String,
-        default: 'client', // Default role for new users
+        default: 'default', // Default role for new users
     },
 
     lastLogin: {
