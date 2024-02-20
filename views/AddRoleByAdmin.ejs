@@ -209,6 +209,7 @@ function deleteRole(index) {
     document.getElementById('cancelDelete').addEventListener('click', function () {
         console.log('Deletion canceled.');
         confirmationModal.style.display = 'none';
+        location.reload()
     });
    
 }

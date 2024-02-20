@@ -19,7 +19,7 @@ passport.use(new OrcidStrategy({
   sandbox: process.env.NODE_ENV !== 'production',
   clientID: keys.orcid.clientID,
   clientSecret: keys.orcid.clientSecret,
-  callbackURL: "https://9108-194-167-235-220.ngrok-free.app/auth/orcid/redirect",
+  callbackURL: "https://feb5-2a01-e0a-3cc-2cd0-9900-6a9e-5cc9-f5dd.ngrok-free.app/auth/orcid/redirect",
 },
 (accessToken, refreshToken, params, profile, done) => {
   const options = {
@@ -53,20 +53,20 @@ passport.use(new OrcidStrategy({
               //console.log(result);
 
               const educations = result['record:record']['activities:activities-summary']['activities:educations'];
-const employments = result['record:record']['activities:activities-summary']['activities:employments'];
-const qualifications = result['record:record']['activities:activities-summary']['activities:qualifications'];
+              const employments = result['record:record']['activities:activities-summary']['activities:employments'];
+              const qualifications = result['record:record']['activities:activities-summary']['activities:qualifications'];
 
-//console.log("Educations:", educations);
-//console.log("Employments:", employments);
-//console.log("Qualifications:", qualifications);
+                //console.log("Educations:", educations);
+                //console.log("Employments:", employments);
+                //console.log("Qualifications:", qualifications);
 
-const educationRoleTitle = educations['activities:affiliation-group']['education:education-summary']['common:role-title'];
-console.log("Education Role Title:", educationRoleTitle);
+              const educationRoleTitle = educations['activities:affiliation-group']['education:education-summary']['common:role-title'];
+              console.log("Education Role Title:", educationRoleTitle);
 
-const employmentRoleTitle = employments['activities:affiliation-group']['employment:employment-summary']['common:role-title'];
-const employmentDepartmentName = employments['activities:affiliation-group']['employment:employment-summary']['common:department-name'];
-console.log(employmentRoleTitle)
-console.log(employmentDepartmentName)
+              const employmentRoleTitle = employments['activities:affiliation-group']['employment:employment-summary']['common:role-title'];
+              const employmentDepartmentName = employments['activities:affiliation-group']['employment:employment-summary']['common:department-name'];
+              console.log(employmentRoleTitle)
+              console.log(employmentDepartmentName)
 
               
             
