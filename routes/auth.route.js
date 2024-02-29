@@ -12,6 +12,7 @@ const { sendResetPasswordLink } = require('../models/emailsender');
 
 
 router.get('/orcid', passport.authenticate('orcid',{
+
   //scope: ['openid', 'profile']
   scope: ['read-public']
  
@@ -19,9 +20,8 @@ router.get('/orcid', passport.authenticate('orcid',{
 ))
 
 router.get('/orcid/redirect', passport.authenticate('orcid'), (req, res, next)=>{
-  
-  //res.redirect('/user/profilOrcid') 
-  req.session.ISORCIDUSER = true; // Set session variable for Orcid
+
+  req.session.ISORCIDUSER = true; // Seting session variable for Orcid
   console.log("Orcid Authentication Callback");
   console.log(req.session);
   res.redirect('/user/Profile');
@@ -46,16 +46,9 @@ router.get('/google/redirect',passport.authenticate('google'), (req, res, next)=
 });
 
 
-
 router.get('/Register', (req, res, next)=>{
-  
-    res.render('register'); 
-    
+   res.render('register'); 
 });
-
-
-
-
 
 
 router.post('/Login', (req, res, next)=>{
@@ -71,11 +64,11 @@ router.post('/Login', (req, res, next)=>{
     try {
       
            if (FetchEmailForLogin) {
+
                const passwordMatch = await bcrypt.compare(password_field1, FetchEmailForLogin.password_field1);
 
 
-         
-               if (passwordMatch){
+              if (passwordMatch){
 
                
                if (!FetchEmailForLogin.is_verified) {
@@ -93,44 +86,39 @@ router.post('/Login', (req, res, next)=>{
                   // Update the existing record instead of creating a new one
                   existingLastLogin.lastLogin = new Date();
                   await existingLastLogin.save();
+
                 } else {
                   // Create a new record only if it doesn't already exist
                   FetchEmailForLogin.lastLogin = new Date();
-                 
                   const lastlogin = new User({
                    
                     lastLogin: FetchEmailForLogin.lastLogin,
                     
-                   
-                  
-
                   });
+
                   await lastlogin.save();
+
                 }
 
-                
-
-                
-
                 //---------------------END OF TO SAVE LAST LOGIN FROM SESSION TO NEW DATABASE LOGININFO--------------------------------------//
+
                 req.session.isAuth = true;
                 
                 req.session.FetchEmailForLogin = {     //req.session is an object used to store session info part of express-session middleware
                   _id: FetchEmailForLogin._id,
                   email: FetchEmailForLogin.email_field,
-                 // title: FetchEmailForLogin.title,
                   lastLogin: FetchEmailForLogin.lastLogin,
                   roleGiven: FetchEmailForLogin.roleGiven
                   
                 };
-                //0000000000000000000000000000000000000000000000000000000000000000000
+                //******************************************************************* */
                 
                 if(FetchEmailForLogin.roleGiven === 'ADMIN'){
                   req.session.isAuthWithAdmin = true;
                 }
 
 
-                //0000000000000000000000000000000000000000000000000000000000000000000
+                //******************************************************************* */
                 return res.redirect('/user/Profile');
                 
                }
@@ -148,10 +136,11 @@ router.post('/Login', (req, res, next)=>{
            res.redirect('/auth/Login');
            }
         } 
-    catch (error) 
-        {
-          console.error('Error :', error);
-        }
+
+        catch (error) 
+         {
+           console.error('Error :', error);
+         }
     
    }
    LoginData()
@@ -161,16 +150,11 @@ router.post('/Login', (req, res, next)=>{
 
 
 
-
-
-
-
-
 router.post('/Register', (req, res, next)=>{
    
     //*******************************INSERTION OF FIELD VALUES OF REGISTER FORM TO DATABASE********************************* */
 
-    const email_field = req.body.email_field    // these are names in register.ejs
+    const email_field = req.body.email_field          // these are names in register.ejs
     const password_field1 = req.body.password_field1  // these are names in register.ejs
     const password_field2 = req.body.password_field2  // these are names in register.ejs
 
@@ -190,7 +174,7 @@ router.post('/Register', (req, res, next)=>{
                 req.flash('error', 'Email already exists');
                  res.redirect('/auth/Register');
                  console.log('email already exist')
-                 //res.render('register', { ErrorEmailAlready: 'E-mail already exists.' });
+                
                  return
                }
                //***********************END OF CHECK IF EMAIL ALREADY EXIST/******************************** */
@@ -205,7 +189,7 @@ router.post('/Register', (req, res, next)=>{
                  return
                } 
 
-              else if (!password_field1 || !password_field2) {
+               else if (!password_field1 || !password_field2) {
                 req.flash('error', 'Password cannot be blank');
                 return res.redirect('/auth/Register');
                }
@@ -225,13 +209,12 @@ router.post('/Register', (req, res, next)=>{
                // SO allowing user to register his credentials in database
                // Create an instance 'user' of the model 'User' that we imported in this file with the form data
                const user = new User({
+
                 email_field,        // this is coming from user.model.js 
                 password_field1,    // this is coming from user.model.js 
                 verificationToken
-                
-                   
-                
-                });
+
+               });
  
                // Save the instance to the database
                 const savedData = await user.save();
@@ -241,13 +224,11 @@ router.post('/Register', (req, res, next)=>{
 
                  //***********************************END REGISTER EMAIL GMAIL VERIFICATION******************************************************* */
                 req.flash('success', 'You have been registered');
-                //res.send(savedData)   // sending json mongodb to other page after register
+                
                 console.log('Data saved successfully:', savedData);
                 
                 res.redirect('/auth/Register');
-               
-               
-                
+         
                 
                }
             }
@@ -288,6 +269,7 @@ router.get('/Logout', async(req, res, next)=>{
 
 
 router.get('/verify', async (req, res) => {
+
   const token = req.query.token;
 
   try {
@@ -304,14 +286,14 @@ router.get('/verify', async (req, res) => {
 
       req.flash('success', 'Email verified successfully');
       res.redirect('/auth/Login'); 
+
   } catch (error) {
+
       console.error('Error verifying email:', error);
       req.flash('error', 'Error verifying email');
       res.redirect('/auth/Register');
   }
 });
-
-
 
 
 
@@ -322,8 +304,6 @@ router.get('/Forgot', async (req, res) => {
      console.log(error)
   }
 });
-
-
 
 
 router.post('/Forgot', async (req, res) => {
@@ -371,8 +351,6 @@ router.get('/reset', async (req, res) => {
           return res.redirect('/auth/Register');
       }
 
-      
-
      // req.flash('success', 'now you can reset your password');
       res.render('reset', { token , email}); 
   } catch (error) {
@@ -381,9 +359,6 @@ router.get('/reset', async (req, res) => {
       res.redirect('/auth/Register');
   }
 });
-
-
-
 
 
 router.post('/reset', async (req, res) => {
@@ -420,8 +395,6 @@ router.post('/reset', async (req, res) => {
     res.redirect('/auth/Register');
   }
 });
-
-
 
 
 
