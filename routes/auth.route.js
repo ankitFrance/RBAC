@@ -366,6 +366,14 @@ router.post('/reset', async (req, res) => {
   const email = req.body.email;
   console.log('Received token:', token); 
   const newPassword = req.body.password_reset;
+  const confirmPassword = req.body.password_reset2; 
+
+  // Check if passwords match
+  if (newPassword !== confirmPassword) {
+    req.flash('error', 'Passwords do not match');
+    return res.redirect('/auth/Register');
+  }
+
   
 
   try {
