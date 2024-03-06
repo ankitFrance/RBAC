@@ -4,7 +4,7 @@ const router = require('express').Router();
 
 
 const renderGoogleProfile = (req, res, next, user) => {
-  
+
   const GoogleUser = req.user;
   res.render('profile', { GoogleUser });
   //next(); // Call next to pass control to the next middleware

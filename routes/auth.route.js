@@ -41,6 +41,8 @@ router.get('/Login', (req, res, next)=>{
 
 router.get('/google/redirect',passport.authenticate('google'), (req, res, next)=>{
   req.session.ISGOOGLEUSER = true; // Set session variable for Google
+  //console.log(req.session);
+ 
   res.redirect('/user/Profile');
  
 });
