@@ -73,6 +73,10 @@ let userSchema = new schema({
     orcidEducationRoleTitle : {
 
         type : String
+    }, 
+    orcidEmploymentInstitution : {
+
+        type : String
     }
    
 

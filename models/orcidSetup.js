@@ -19,7 +19,7 @@ passport.use(new OrcidStrategy({
   sandbox: process.env.NODE_ENV !== 'production',
   clientID: keys.orcid.clientID,
   clientSecret: keys.orcid.clientSecret,
-  callbackURL: "https://feb5-2a01-e0a-3cc-2cd0-9900-6a9e-5cc9-f5dd.ngrok-free.app/auth/orcid/redirect",
+  callbackURL: "https://982f-2a01-e0a-3cc-2cd0-2007-42c9-5759-758e.ngrok-free.app/auth/orcid/redirect",
 },
 (accessToken, refreshToken, params, profile, done) => {
   const options = {
@@ -57,16 +57,18 @@ passport.use(new OrcidStrategy({
               const qualifications = result['record:record']['activities:activities-summary']['activities:qualifications'];
 
                 //console.log("Educations:", educations);
-                //console.log("Employments:", employments);
+                // console.log("Employments:", employments);
                 //console.log("Qualifications:", qualifications);
 
               const educationRoleTitle = educations['activities:affiliation-group']['education:education-summary']['common:role-title'];
-              console.log("Education Role Title:", educationRoleTitle);
+              //console.log("Education Role Title:", educationRoleTitle);
 
               const employmentRoleTitle = employments['activities:affiliation-group']['employment:employment-summary']['common:role-title'];
               const employmentDepartmentName = employments['activities:affiliation-group']['employment:employment-summary']['common:department-name'];
-              console.log(employmentRoleTitle)
-              console.log(employmentDepartmentName)
+              const employmentInstitution = employments['activities:affiliation-group']['employment:employment-summary']['common:organization'] ['common:name'];
+             // console.log(employmentInstitution)
+             // console.log(employmentRoleTitle)
+              //console.log(employmentDepartmentName)
 
               
             
@@ -92,7 +94,8 @@ passport.use(new OrcidStrategy({
                     lastLogin: Date.now(),
                     orcidEmploymentDepartmentName: employmentDepartmentName,
                     orcidEmploymentRoleTitle:employmentRoleTitle,
-                    orcidEducationRoleTitle:educationRoleTitle
+                    orcidEducationRoleTitle:educationRoleTitle, 
+                    orcidEmploymentInstitution:employmentInstitution
                   }).save().then((newUser) => {
                     console.log('new user created', newUser);
                     done(null, newUser);
