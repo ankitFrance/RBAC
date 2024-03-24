@@ -129,16 +129,27 @@ const port = process.env.PORT || 3080;
 
 //************************************Database connection********************************
 mongoose.connect("mongodb://127.0.0.1:27017/GestDeUtil", {useNewUrlParser: true});
+
 const db = mongoose.connection;
 db.on('error', ()=>{
     console.log('something went wrong')
 })
 
 db.once( 'open', ()=>{
-    console.log('connected sucessfully')
+    console.log('connected sucessfully');
+  
 });
 //************************************Database connection end********************************
+/*
 
+const firstDBConnection = mongoose.createConnection('mongodb://127.0.0.1:27017/Const', { useNewUrlParser: true, useUnifiedTopology: true });
+firstDBConnection.once('open', ()=>{
+  console.log('connected sucessfully hdhdhd');
+
+});
+*/
+
+//
 app.listen(port , () => {
     console.log('app is running on ${port}')
 });

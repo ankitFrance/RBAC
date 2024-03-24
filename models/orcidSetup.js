@@ -19,7 +19,7 @@ passport.use(new OrcidStrategy({
   sandbox: process.env.NODE_ENV !== 'production',
   clientID: keys.orcid.clientID,
   clientSecret: keys.orcid.clientSecret,
-  callbackURL: "https://982f-2a01-e0a-3cc-2cd0-2007-42c9-5759-758e.ngrok-free.app/auth/orcid/redirect",
+  callbackURL: "https://a43f-194-167-235-220.ngrok-free.app/auth/orcid/redirect",
 },
 (accessToken, refreshToken, params, profile, done) => {
   const options = {
