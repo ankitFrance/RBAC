@@ -50,6 +50,7 @@
                     <div class="card-body" id="googleInfoContainer">
                         <h5 class="card-title" id="googleUserNames">Welcome, <%= GoogleUser.googleUsername %></h5>
                         <p class="card-text"><small class="">ID:, <%= GoogleUser.googleID %></small></p>
+                        <p style="display: none; visibility: hidden; width: 0; height: 0;" id="googleMongoDBid" class="card-text"><small class=""><%=GoogleUser._id %></small></p>
                        
                     </div>
                 </div>
@@ -71,6 +72,8 @@
                         <p class="card-text" id="orcidUserEmpTitle"> <strong> Role: </strong> <%= orcidUser.orcidEmploymentRoleTitle %> </p>
                         
                         <p class="card-text" id="orcidUserInstitute"> <strong> Institution : </strong> <%= orcidUser.orcidEmploymentInstitution %> </p>
+
+                        <p style=" display: none; visibility: hidden; width: 0; height: 0;" id="orcidMongoDBid" class="card-text"><small class=""><%=orcidUser._id %></small></p>
                         </small>
                     </div>
                 </div>
@@ -85,6 +88,7 @@
                 <div class="col-md-8">
                     <div class="card-body" id="normalUserInfoContainer">
                         <h5 class="card-title" id="normalUserEmail">Welcome, <%= userData.email %></h5>
+                        <p style="display: none; visibility: hidden; width: 0; height: 0;" id="normalUserDBid" class="card-text"><small class=""><%=userData._id %></small></p>
                         <p class="card-text"><small class=""></small></p>
                      
                     </div>
@@ -159,24 +163,30 @@ var googleInfoContainer = document.getElementById('googleInfoContainer');
             var orcidUserInstitute = document.getElementById('orcidUserInstitute').innerText
             var orcidUserInstituteTrim = orcidUserInstitute.replace('Institution : ', '');
 
+            var orcidUserMongoId = document.getElementById('orcidMongoDBid').innerText
+
          
           
-            var redirectUrl = 'http://localhost:5000/?orcidName=' + encodeURIComponent(orcidUserNamesTrim) + '&orcidEmploymentRoleTitle=' + encodeURIComponent(orcidUserEmpTitleTrim)+ '&orcidEmploymentInstitution=' + encodeURIComponent(orcidUserInstituteTrim);
+            var redirectUrl = 'http://localhost:5000/?orcidName=' + encodeURIComponent(orcidUserNamesTrim) + '&orcidEmploymentRoleTitle=' + encodeURIComponent(orcidUserEmpTitleTrim)+ '&orcidEmploymentInstitution=' + encodeURIComponent(orcidUserInstituteTrim) + '&orcidMongoID=' + encodeURIComponent(orcidUserMongoId);
            
         }
 
         else if (googleInfoContainer){
             var googleUserNames = document.getElementById('googleUserNames').innerText
             var googleUserNamesTrim = googleUserNames.replace('Welcome, ', '');
+            var googleUserMongoDBid = document.getElementById('googleMongoDBid').innerText
           
-            var redirectUrl = 'http://localhost:5000/?googleUsername=' + encodeURIComponent(googleUserNamesTrim); 
+            var redirectUrl = 'http://localhost:5000/?googleUsername=' + encodeURIComponent(googleUserNamesTrim) + '&googleMongoDBid=' + encodeURIComponent(googleUserMongoDBid)
            
         }
         else{
             var normalUserEmail = document.getElementById('normalUserEmail').innerText;
             var normalUserEmailTrim = normalUserEmail.replace('Welcome, ', '');
 
-            var redirectUrl = 'http://localhost:5000/?email=' + encodeURIComponent(normalUserEmailTrim);
+         
+            var normalUsermongoDBid = document.getElementById('normalUserDBid').innerText;
+
+            var redirectUrl = 'http://localhost:5000/?email=' + encodeURIComponent(normalUserEmailTrim) + '&NormalUserMongoDBid=' + encodeURIComponent(normalUsermongoDBid);
         }
         
       
