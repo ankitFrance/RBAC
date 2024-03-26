@@ -140,14 +140,7 @@ db.once( 'open', ()=>{
   
 });
 //************************************Database connection end********************************
-/*
 
-const firstDBConnection = mongoose.createConnection('mongodb://127.0.0.1:27017/Const', { useNewUrlParser: true, useUnifiedTopology: true });
-firstDBConnection.once('open', ()=>{
-  console.log('connected sucessfully hdhdhd');
-
-});
-*/
 
 //
 app.listen(port , () => {
