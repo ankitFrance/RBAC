@@ -1,7 +1,6 @@
 
 const router = require('express').Router()
 const User = require('../models/user.model')
-const LastLogin = require('../models/lastLogin')
 const mongoose = require('mongoose')
 const { titles } = require('../models/constants')
 

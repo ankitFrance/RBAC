@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const session = require('express-session');
-const LastLogin = require('../models/lastLogin')
 const User = require('../models/user.model')
 const bcrypt = require('bcrypt');
 const {titles} =  require('../models/constants'); 
