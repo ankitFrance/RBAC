@@ -1,0 +1,233 @@
+<%- include('./layouts/header') %>
+
+
+<% if (locals.errors && locals.errors.length > 0) { %>
+    <div class="alert alert-danger">
+  
+        <% locals.errors.forEach(function(error) { %>
+          <span><%= error %></span>
+        <% }); %>
+  
+    </div>
+  <% } %>
+  
+  <% if (locals.success && locals.success.length > 0) { %>
+    <div class="alert alert-success">
+    
+        <% locals.success.forEach(function(success) { %>
+          <span><%= success %></span>
+        <% }); %>
+   
+    </div>
+  <% } %>
+  
+<!----------------------------------------------------------------------------------------->
+ 
+
+
+
+
+<!--CODE OF HERE IS INSIDE documentation.txt in this project-->
+
+
+
+
+
+
+
+
+<!----------------------------------------------------------------------------------------->
+
+<!--Profile card-->
+<div class="container">
+    <% if (GoogleUser) { %>
+        <div class="card mb-3" style="max-width: 540px; background-color: rgb(0, 0, 0); color: white; margin-top: 20px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="/userIcon.jpg" class="card-img" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body" id="googleInfoContainer">
+                        <h5 class="card-title" id="googleUserNames">Welcome, <%= GoogleUser.googleUsername %></h5>
+                        <p class="card-text"><small class="">ID:, <%= GoogleUser.googleID %></small></p>
+                        <p style="display: none; visibility: hidden; width: 0; height: 0;" id="googleMongoDBid" class="card-text"><small class=""><%=GoogleUser._id %></small></p>
+                        <p class="card-text"><small class="">no of docs, <%= numberOfDocs %></small></p>
+                         <!---->
+                       
+
+                         <% for (var i = 0; i < recordsForTimeStamp.length; i++) { %>
+                            <p>This is paragraph <%= recordsForTimeStamp[i] %></p>
+                        <% } %>
+
+                     
+
+                        <!---->
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } else if (orcidUser) { %>
+        <div class="card mb-3" style="max-width: 540px; background-color: rgb(0, 0, 0); color: white; margin-top: 20px;" >
+            <div class="row no-gutters">
+                <div class="col-md-4" >
+                    <img src="/userIcon.jpg" class="card-img" alt="..."  >
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body" id="orcidInfoContainer">
+                  
+                        <h5 class="card-title" id="orcidUserNames">Welcome, <%= orcidUser.orcidName %></h5>
+                        <small>
+                        <p class="card-text"><strong>ID: </strong> <%= orcidUser.orcidID %></p>
+                       
+                        <p class="card-text" id="orcidUserEmpTitle"> <strong> Role: </strong> <%= orcidUser.orcidEmploymentRoleTitle %> </p>
+                        
+                        <p class="card-text" id="orcidUserInstitute"> <strong> Institution : </strong> <%= orcidUser.orcidEmploymentInstitution %> </p>
+
+                        <p style=" display: none; visibility: hidden; width: 0; height: 0;" id="orcidMongoDBid" class="card-text"><small class=""><%=orcidUser._id %></small></p>
+                        </small>
+                        <p class="card-text"><small class="">no of docs, <%= numberOfDocs %></small></p>
+                        <!---->
+                      
+
+                        <% for (var i = 0; i < recordsForTimeStamp.length; i++) { %>
+                           <p>This is paragraph <%= recordsForTimeStamp[i] %></p>
+                       <% } %>
+
+                    
+
+                       <!---->
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="card mb-3" style="max-width: 540px; background-color: rgb(0, 0, 0); color: white; margin-top: 20px;">
+            <div class="row no-gutters">
+                <div class="col-md-4" >
+                    <img src="/userIcon.jpg" class="card-img" alt="..." >
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body" id="normalUserInfoContainer">
+                        <h5 class="card-title" id="normalUserEmail">Welcome, <%= userData.email %></h5>
+                        <p style="display: none; visibility: hidden; width: 0; height: 0;" id="normalUserDBid" class="card-text"><small class=""><%=userData._id %></small></p>
+                        <p class="card-text"><small class=""></small></p>
+                        <p class="card-text"><small class="">no of docs, <%= numberOfDocs %></small></p>
+                        <!---->
+                      
+
+                        <% for (var i = 0; i < recordsForTimeStamp.length; i++) { %>
+                           <p>This is paragraph <%= recordsForTimeStamp[i] %></p>
+                       <% } %>
+
+                    
+
+                       <!---->
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<!---->
+
+<div class="container cards">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="/orange.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">OpenTheso</h5>
+                    <p class="card-text">Gestion des thesaurus </p>
+                    <a href="#" class="btn btn-primary">OpenTheso</a>
+                </div>
+            </div>
+        </div>
+
+       
+
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="/orange.png" class="card-img-top" alt="..." >
+                <div class="card-body">
+                    <h5 class="card-title">Constat d'etat</h5>
+                    <p class="card-text"> Formulaire pour les états de l'objet.</p>
+                    <a  class="btn btn-primary" id="button3">Constat d'etat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    </div>
+</div>
+
+<!---------------------------------------------------->
+<script>
+
+
+var orcidInfoContainer = document.getElementById('orcidInfoContainer');
+var googleInfoContainer = document.getElementById('googleInfoContainer');
+
+  
+    
+    
+   
+   
+    document.getElementById('button3').addEventListener('click', function() {
+        // Construct the URL with query parameters
+
+
+
+        
+    
+        if(orcidInfoContainer){
+
+            var orcidUserNames = document.getElementById('orcidUserNames').innerText
+            var orcidUserNamesTrim = orcidUserNames.replace('Welcome, ', '');
+
+            var orcidUserEmpTitle = document.getElementById('orcidUserEmpTitle').innerText
+            var orcidUserEmpTitleTrim = orcidUserEmpTitle.replace('Role: ', '');
+
+            var orcidUserInstitute = document.getElementById('orcidUserInstitute').innerText
+            var orcidUserInstituteTrim = orcidUserInstitute.replace('Institution : ', '');
+
+            var orcidUserMongoId = document.getElementById('orcidMongoDBid').innerText
+
+         
+          
+            var redirectUrl = 'http://localhost:5000/?orcidName=' + encodeURIComponent(orcidUserNamesTrim) + '&orcidEmploymentRoleTitle=' + encodeURIComponent(orcidUserEmpTitleTrim)+ '&orcidEmploymentInstitution=' + encodeURIComponent(orcidUserInstituteTrim) + '&orcidMongoID=' + encodeURIComponent(orcidUserMongoId);
+           
+        }
+
+        else if (googleInfoContainer){
+            var googleUserNames = document.getElementById('googleUserNames').innerText
+            var googleUserNamesTrim = googleUserNames.replace('Welcome, ', '');
+            var googleUserMongoDBid = document.getElementById('googleMongoDBid').innerText
+          
+            var redirectUrl = 'http://localhost:5000/?googleUsername=' + encodeURIComponent(googleUserNamesTrim) + '&googleMongoDBid=' + encodeURIComponent(googleUserMongoDBid)
+           
+        }
+        else{
+            var normalUserEmail = document.getElementById('normalUserEmail').innerText;
+            var normalUserEmailTrim = normalUserEmail.replace('Welcome, ', '');
+
+         
+            var normalUsermongoDBid = document.getElementById('normalUserDBid').innerText;
+
+            var redirectUrl = 'http://localhost:5000/?email=' + encodeURIComponent(normalUserEmailTrim) + '&NormalUserMongoDBid=' + encodeURIComponent(normalUsermongoDBid);
+        }
+        
+      
+
+  
+        window.location.href = redirectUrl;
+    });
+    
+</script>
+<!---------------------------------------------------->
+
+<%- include('./layouts/footer') %>
