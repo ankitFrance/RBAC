@@ -37,15 +37,15 @@ const renderGoogleProfile = (req, res, next, user) => {
     const numberOfDocs = filteredRecords.length;
     console.log(numberOfDocs); 
 
-    const recordsForTimeStamp = [];
+    const recordsForConstatidSubmitted = [];
     documents.forEach(element => {
       if (element.mongoIdStore.GoogleUserMongoID === GoogleUserIDinString) {
-          recordsForTimeStamp.push(element.submissionTimestamp);
+        recordsForConstatidSubmitted.push(element._id);
        } 
         });
-        console.log(recordsForTimeStamp)
+        console.log(recordsForConstatidSubmitted)
 
-    res.render('profile', { GoogleUser, numberOfDocs,  recordsForTimeStamp });
+    res.render('profile', { GoogleUser, numberOfDocs,  recordsForConstatidSubmitted });
     
   } catch (error) {
    
@@ -96,15 +96,15 @@ const uri = 'mongodb://127.0.0.1:27017';
     const numberOfDocs = filteredRecords.length;
     console.log(numberOfDocs); 
 
-    const recordsForTimeStamp = [];
+    const recordsForConstatidSubmitted = [];
     documents.forEach(element => {
       if (element.mongoIdStore.OrcidUserMongoID === OrcidUserIDinString) {
-          recordsForTimeStamp.push(element.submissionTimestamp);
+        recordsForConstatidSubmitted.push(element._id);
        } 
         });
-        console.log(recordsForTimeStamp)
+        console.log(recordsForConstatidSubmitted)
 
-    res.render('profile', {  orcidUser, numberOfDocs, recordsForTimeStamp}   );
+    res.render('profile', {  orcidUser, numberOfDocs, recordsForConstatidSubmitted}   );
     
   } catch (error) {
    
@@ -159,15 +159,15 @@ const renderNormalprofile = (req, res, next) => {
     const numberOfDocs = filteredRecords.length;
     console.log(numberOfDocs); 
 
-    const recordsForTimeStamp = [];
+    const recordsForConstatidSubmitted = [];
     documents.forEach(element => {
       if (element.mongoIdStore.NormalUserMongoID === NormalUserIDinString) {
-          recordsForTimeStamp.push(element.submissionTimestamp);
+        recordsForConstatidSubmitted.push(element._id);
        } 
         });
-        console.log(recordsForTimeStamp)
+        console.log(recordsForConstatidSubmitted)
 
-        res.render('profile', { userData, numberOfDocs,  recordsForTimeStamp });
+        res.render('profile', { userData, numberOfDocs,  recordsForConstatidSubmitted });
     
   } catch (error) {
    

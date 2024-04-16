@@ -78,7 +78,7 @@
 
 /*************************** CARD ANIMATION **********************************/
 .card:hover{
-  transform: scale(1.06);   /* makes card bigger */
+  transform: scale(1.01);   /* makes card bigger */
 }
 
 .card{

@@ -38,7 +38,7 @@ router.get('/AllUsers',isAdmin,  async(req, res, next)=>{
 
 
 // this route  is for when user click ' view profile' 
-  router.get('/AllUsers/:id',isAdmin,  async(req, res, next)=>{
+  router.get('/AllUsers/:id',isAdmin,  async(req, res, next)=>{ 
 
     try {
 
