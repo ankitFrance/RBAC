@@ -240,6 +240,7 @@
                     
                     <% for (var i = 0; i < recordsForConstatidSubmitted.length; i++) { %>
                         <li> <a href="http://localhost:5000/report/<%= recordsForConstatidSubmitted[i] %>"> <%= recordsForConstatidSubmitted[i] %> </a></li>
+                        <a href="http://localhost:5000/Update/<%= recordsForConstatidSubmitted[i] %>" class="btn btn-primary">Update</a>
                     <% } %>
 
                   </ul>
